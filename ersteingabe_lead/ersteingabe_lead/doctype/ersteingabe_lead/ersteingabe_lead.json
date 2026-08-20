@@ -75,7 +75,7 @@
    "fieldname": "thema",
    "fieldtype": "Select",
    "label": "Thema",
-   "options": "\nAZ-Allgmein Vorstellung\nIT-Sicherheit\nIT-L\u00f6sungen\nIT-Service & Support"
+   "options": "\nAllgemein Vorstellung\nIT-Sicherheit\nIT-L\u00f6sungen\nIT-Service & Support"
   },
   {
    "fieldname": "leadquelle",
