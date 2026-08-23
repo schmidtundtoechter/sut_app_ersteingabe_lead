@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Ersteingabe Lead AZ-IT",
+  "enabled": 1,
+  "modified": "2024-12-04 11:50:40.874636",
+  "module": "Az It",
+  "name": "Ersteingabe Lead AZ IT - Telefonnummerneingabe optimieren",
+  "script": "frappe.ui.form.on('Ersteingabe Lead AZ-IT', {\r\n    validate: function(frm) {\r\n        // Funktion zur Bereinigung und Validierung der Telefonnummer\r\n        function validatePhoneNumber(phoneNumber, fieldName) {\r\n            if (phoneNumber) {\r\n                // \u00dcberpr\u00fcfen, ob die Telefonnummer mit einem + beginnt\r\n                if (phoneNumber.charAt(0) !== '+') {\r\n                    frappe.throw(\"Die Telefonnummer in \" + fieldName + \" muss mit einem + und einer L\u00e4nderkennung beginnen. Beispiel: +49123456\");\r\n                }\r\n\r\n                // Entfernen aller nicht erlaubten Zeichen aus der Eingabe\r\n                phoneNumber = phoneNumber.replace(/\\s+/g, '');   // Leerzeichen entfernen\r\n                phoneNumber = phoneNumber.replace(/\\-+/g, '');   // Bindestriche entfernen\r\n                phoneNumber = phoneNumber.replace(/\\(+/g, '');   // \u00d6ffnende Klammern entfernen\r\n                phoneNumber = phoneNumber.replace(/\\)+/g, '');   // Schlie\u00dfende Klammern entfernen\r\n                phoneNumber = phoneNumber.replace(/\\[+/g, '');   // Eckige Klammern entfernen\r\n                phoneNumber = phoneNumber.replace(/\\]+/g, '');   // Schlie\u00dfende eckige Klammern entfernen\r\n                phoneNumber = phoneNumber.replace(/\\/+/g, '');   // Schr\u00e4gstriche entfernen\r\n\r\n                // Bereinigte Telefonnummer zur\u00fccksetzen\r\n                frm.set_value(fieldName, phoneNumber);\r\n            }\r\n        }\r\n\r\n        // Beide Telefonnummernfelder \u00fcberpr\u00fcfen und berichtigen\r\n        validatePhoneNumber(frm.doc.telefon, 'telefon');\r\n        validatePhoneNumber(frm.doc.telefon_zentrale, 'telefon_zentrale');\r\n    }\r\n});\r\n",
+  "view": "Form"
+ }
+]
